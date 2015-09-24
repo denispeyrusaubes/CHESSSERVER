@@ -7,7 +7,9 @@ To deploy:
 ```mvn install tomee:run```
 
 The REST API is basic: a simple GET request, with two parameters:
+
 Moves: contains the moves history, the server reruns this history in order the board to be in your correct configuration
+
 Active: the position of the piece you want retrieve possibles moves 
 
 ```http://YOUSERVER/ChessServer-1.0-SNAPSHOT/chesschecker?moves=XXXXXXXctive=YY
