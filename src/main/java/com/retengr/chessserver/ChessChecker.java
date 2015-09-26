@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import jchess.core.Game;
@@ -24,31 +23,40 @@ public class ChessChecker {
     public String possibleMoves(@QueryParam("moves") String moves,
             @QueryParam("active") String active) {
         String result = null;
-
+        if (moves==null) moves="";
         Game newGUI = new Game();
         // Il faut initialiser les pieces sur le chessboard !
         Player p1 = new HumanPlayer("p1", "white");
         Player p2 = new HumanPlayer("p2", "black");
 
         newGUI.getChessboard().setPieces("", p1, p2);
+        
+        System.out.println("input:"+moves);
+        //moves = "";
         newGUI.getMoves().setMoves(moves);
 
         int x = convert(active.charAt(0));
         int y = 8 - Integer.parseInt(active.substring(1));
+        
+        
         Square myActiveSquare = newGUI.getChessboard().getSquares()[x][y];
+        
+        System.out.println("coucou"+myActiveSquare.getPiece());
         Set<Square> possibleMovesTmp = myActiveSquare.getPiece().getAllMoves();
+        System.out.println("kfds");
         List<Square> possibleMoves = new ArrayList<Square>();
+        System.out.println("aa");
         possibleMoves.addAll(possibleMovesTmp);
 
-        result = "{possibleMoves:[";
+        result = "{\"possibleMoves\":[";
         if (!possibleMoves.isEmpty()) {
             Square first = possibleMoves.get(0);
-            String position = getLetter(first.getPozX()) + "" + (8 - first.getPozY());
+            String position = "\""+getLetter(first.getPozX()) + "" + (8 - first.getPozY())+"\"";
             result += position;
             if (possibleMoves.size() > 1) {
                 for (int i = 1; i < possibleMoves.size(); i++) {
                     Square s = possibleMoves.get(i);
-                    position = "," + getLetter(s.getPozX()) + "" + (8 - s.getPozY());
+                    position = ",\"" + getLetter(s.getPozX()) + "" + (8 - s.getPozY())+"\"";
                     result += position;
                 }
             }
