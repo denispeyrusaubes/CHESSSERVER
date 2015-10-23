@@ -31,9 +31,9 @@ public class ChessChecker {
 
         newGUI.getChessboard().setPieces("", p1, p2);
         
-        System.out.println("input:"+moves);
+        System.out.println("moves:"+moves+";");
         //moves = "";
-        newGUI.getMoves().setMoves(moves);
+        newGUI.getMoves().setMoves(moves+" ");
 
         int x = convert(active.charAt(0));
         int y = 8 - Integer.parseInt(active.substring(1));
@@ -41,11 +41,8 @@ public class ChessChecker {
         
         Square myActiveSquare = newGUI.getChessboard().getSquares()[x][y];
         
-        System.out.println("coucou"+myActiveSquare.getPiece());
         Set<Square> possibleMovesTmp = myActiveSquare.getPiece().getAllMoves();
-        System.out.println("kfds");
         List<Square> possibleMoves = new ArrayList<Square>();
-        System.out.println("aa");
         possibleMoves.addAll(possibleMovesTmp);
 
         result = "{\"possibleMoves\":[";
@@ -63,7 +60,7 @@ public class ChessChecker {
         }
 
         result = result+"]}";
-
+        System.out.println(result);
         return result;
     }
 
