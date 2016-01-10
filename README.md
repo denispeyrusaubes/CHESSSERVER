@@ -26,6 +26,3 @@ correct url:
 
 returns: ```{possibleMoves:[g5,g1,d4,e5]}```
 
-
-FYI: moves format corresponds to a standard chess notation I don't remember the name... javaopenchess export a game respecting that format. You may espace the moves values because of spaces
-
